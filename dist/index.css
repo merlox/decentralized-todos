@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.main-container {
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 5px;
+    width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.title-todos {
+    margin: 20px 0;
+}
+
+#add-todo-input {
+    width: 70%;
+    margin: 20px 0;
+}
+
+.add-todo {
+    width: 28%;
+    margin: 20px 0;
+}
+
+.my-todos {
+    background-color: #e4e4e4;
+}

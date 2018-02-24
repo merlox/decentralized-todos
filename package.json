@@ -1,0 +1,26 @@
+{
+  "name": "decentralized-todos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "6.26.0",
+    "babel-env": "2.4.1",
+    "css-loader": "0.28.9",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "style-loader": "0.20.1",
+    "stylus": "0.54.5",
+    "stylus-loader": "3.0.1",
+    "truffle": "4.0.6",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "0.20.3",
+    "webpack": "3.11.0"
+  }
+}
