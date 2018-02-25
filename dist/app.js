@@ -12,27 +12,25 @@ let todos = ''
 // Gets all the todos one by one
 async function generateTodos() {
 	let firstTodo = await getSingleTodo(0)
+	todos = `<div class="main-container">
+		<h4 class="title-todos">Your To-Dos</h4>
+		<input type="text" placeholder="New to-do content..." id="add-todo-input" maxlength="32" />
+		<button class="add-todo" onClick="addTodo(document.querySelector('#add-todo-input').value)">Add To-Do</button>`
 	if(web3.toUtf8(firstTodo[1]).length === 0) {
-		todos = `
-		<div class="main-container">
-			<h4 class="title-todos">Your To-Dos</h4>
-			<input type="text" placeholder="New to-do content..." id="add-todo-input" />
-			<button class="add-todo" onClick="addTodo(document.querySelector('#add-todo-input').value)">Add To-Do</button>
-			<div class="my-todos">You don't have any todos yet</div>
-		</div>`
+		todos = `<div class="my-todos">You don't have any todos yet</div>`
 	} else {
 		todos += '<ul class="my-todos">'
 		for(let i = 0; i < maxAmountOfTodos; i++) {
 			let todo = await getSingleTodo(i)
 			let todoContent = web3.toUtf8(todo[1])
-
 			// If the todo content is empty, stop checking all the todos
 			if(todoContent.length === 0) break
-			else todos += `<li id="${parseInt(todo[0])}">${todoContent}</li>`
+			else todos += `<li id="${parseInt(todo[0])}" class="${todo[3] ? 'todo-completed' : ''}">${todoContent}<span class="spacer"></span><button ${todo[3] ? 'disabled' : ''} onClick="markTodoAsCompleted(${todo[0]})">Done</button></li>`
 		}
 		todos += '</ul>'
 	}
-	document.querySelector('#root').innerHTML += todos
+	todos += `</div>`
+	document.querySelector('#root').innerHTML = todos
 }
 
 // Get a specific to-do with a promise for using await async
@@ -49,8 +47,15 @@ function addTodo(content) {
 	if(content.length <= 0) {
 		return alert('You need to write some content to the to-do note before adding it to the smart contract')
 	}
-	contractInstance.addTodo(content)
+	contractInstance.addTodo(content, (err, result) => {
+		// Update the todos after inserting a new one
+		generateTodos()
+	})
 	console.log('called', content)
+}
+
+function markTodoAsCompleted(id) {
+	contractInstance.markTodoAsCompleted(id, (err, result) => {})
 }
 
 generateTodos()

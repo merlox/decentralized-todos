@@ -31,4 +31,17 @@ body {
 
 .my-todos {
     background-color: #e4e4e4;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.spacer {
+    text-decoration: none;
+    width: 20px;
+    display: inline-block;
+}
+
+.todo-completed {
+    text-decoration: line-through;
+    color: grey;
 }
