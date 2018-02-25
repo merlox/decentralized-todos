@@ -1,8 +1,8 @@
 // Remember that we are using ropsten for this application. Once completed we may deploy it to the mainnet for public use
 window.web3 = new Web3(window.web3 ? window.web3.currentProvider : new Web3.providers.HttpProvider('https://ropsten.infura.io'));
 
-const contractABI = [{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"uint256"}],"name":"todos","outputs":[{"name":"id","type":"uint256"},{"name":"content","type":"bytes32"},{"name":"owner","type":"address"},{"name":"isCompleted","type":"bool"},{"name":"timestamp","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maxAmountOfTodos","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"lastId","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_content","type":"bytes32"}],"name":"addTodo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_todoId","type":"uint256"}],"name":"markTodoAsCompleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
-const contractAddress = '0xe8ed349ed7325d910534c5930f51f3c9289a5c06'
+const contractABI = [{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"uint256"}],"name":"todos","outputs":[{"name":"id","type":"uint256"},{"name":"content","type":"bytes32"},{"name":"owner","type":"address"},{"name":"isCompleted","type":"bool"},{"name":"timestamp","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maxAmountOfTodos","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"lastIds","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_content","type":"bytes32"}],"name":"addTodo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_todoId","type":"uint256"}],"name":"markTodoAsCompleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+const contractAddress = '0x814b6984865491153e3a214430bb9c67621ecfba'
 const contractInstance = web3.eth.contract(contractABI).at(contractAddress)
 const maxAmountOfTodos = 100
 
@@ -17,7 +17,7 @@ async function generateTodos() {
 		<input type="text" placeholder="New to-do content..." id="add-todo-input" maxlength="32" />
 		<button class="add-todo" onClick="addTodo(document.querySelector('#add-todo-input').value)">Add To-Do</button>`
 	if(web3.toUtf8(firstTodo[1]).length === 0) {
-		todos = `<div class="my-todos">You don't have any todos yet</div>`
+		todos += `<div class="my-todos">You don't have any todos yet</div>`
 	} else {
 		todos += '<ul class="my-todos">'
 		for(let i = 0; i < maxAmountOfTodos; i++) {
@@ -51,11 +51,12 @@ function addTodo(content) {
 		// Update the todos after inserting a new one
 		generateTodos()
 	})
-	console.log('called', content)
 }
 
 function markTodoAsCompleted(id) {
-	contractInstance.markTodoAsCompleted(id, (err, result) => {})
+	contractInstance.markTodoAsCompleted(id, (err, result) => {
+		generateTodos()
+	})
 }
 
 generateTodos()
