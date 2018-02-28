@@ -4,35 +4,62 @@
 
 body {
     font-family: sans-serif;
+    color: #444444;
+}
+
+button {
+    color: white;
+    background-color: #4141ff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #c3c3c3;
 }
 
 .main-container {
     background-color: whitesmoke;
     padding: 10px;
-    border-radius: 5px;
     width: 400px;
     margin: auto;
     text-align: center;
 }
 
 .title-todos {
-    margin: 20px 0;
+    margin: 20px 0 10px 0;
 }
 
 #add-todo-input {
     width: 70%;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .add-todo {
     width: 28%;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .my-todos {
-    background-color: #e4e4e4;
+    background-color: #ececec;
     list-style-type: none;
     padding-left: 0;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .spacer {

@@ -2,7 +2,7 @@
 window.web3 = new Web3(window.web3 ? window.web3.currentProvider : new Web3.providers.HttpProvider('https://ropsten.infura.io'));
 
 const contractABI = [{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"uint256"}],"name":"todos","outputs":[{"name":"id","type":"uint256"},{"name":"content","type":"bytes32"},{"name":"owner","type":"address"},{"name":"isCompleted","type":"bool"},{"name":"timestamp","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maxAmountOfTodos","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"lastIds","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_content","type":"bytes32"}],"name":"addTodo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_todoId","type":"uint256"}],"name":"markTodoAsCompleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
-const contractAddress = '0x814b6984865491153e3a214430bb9c67621ecfba'
+const contractAddress = '0x70ae16608789f81604fd2f485fb81bc02cf0f8cb'
 const contractInstance = web3.eth.contract(contractABI).at(contractAddress)
 const maxAmountOfTodos = 100
 
