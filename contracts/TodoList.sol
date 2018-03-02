@@ -1,4 +1,4 @@
-pragma solidity 0.4.20;
+pragma solidity 0.4.19;
 
 contract TodoList {
 	struct Todo {
@@ -22,6 +22,8 @@ contract TodoList {
 
     // Add a todo to the list
 	function addTodo(bytes32 _content) public {
+		require(_content[0] != 0);
+
 		Todo memory myNote = Todo(lastIds[msg.sender], _content, msg.sender, false, now);
 		todos[msg.sender][lastIds[msg.sender]] = myNote;
 		if(lastIds[msg.sender] >= maxAmountOfTodos) lastIds[msg.sender] = 0;
